@@ -1,20 +1,35 @@
-// import React from 'react';
-// import { render, fireEvent } from '@testing-library/react';
-// import { UserForm } from './form';
+import { render, screen } from '@testing-library/react';
+import { UserForm } from './form';
+import '@testing-library/jest-dom';
+import { userEvent } from '@testing-library/user-event';
 
-// test('Prueba de formulario', () => {
-//   const { getByLabelText, getByText } = render(<UserForm />);
+describe('UserForm Component', () => {
+  let nameInput: HTMLInputElement;
+  let form: HTMLFormElement;
+  let submitButton: HTMLButtonElement;
+  describe('when submitting the form with valid data', () => {
+    beforeEach(() => {
+      nameInput = screen.getByLabelText('Username') as HTMLInputElement;
+      form = screen.getByText('form');
+      submitButton = screen.getByText('Confirm');
+      render(<UserForm></UserForm>);
+    });
 
-//   const nameInput = getByLabelText('Nombre:');
-//   const emailInput = getByLabelText('Email');
-//   const ageInput = getByLabelText('Edad:');
-//   const submitButton = getByText('Enviar');
+    test('It should render input and button', () => {
+      expect(nameInput).toBeInTheDocument();
+      expect(submitButton).toBeInTheDocument();
+      expect(form).toBeInTheDocument();
+    });
 
-//   fireEvent.change(nameInput, { target: { value: 'Ejemplo' } });
-//   fireEvent.change(emailInput, { target: { value: 'ejemplo@example.com' } });
-//   fireEvent.change(ageInput, { target: { value: '30' } });
-
-//   fireEvent.click(submitButton);
-//   const successMessage = getByText('Formulario enviado con éxito');
-//   expect(successMessage).toBeInTheDocument();
-// });
+    // test('It shoul render input and button', async () => {
+    //   await userEvent.type(nameInput, 'test');
+    //   expect(nameInput).toHaveValue('test');
+    //   nameInput = screen.getByLabelText('Username') as HTMLInputElement;
+    //   // const submitButton = screen.getByText('form');
+    //   const submitButton = screen.getByText('Confirm');
+    //   await userEvent.click(submitButton);
+    // fireEvent.change(nameInput, { target: { value: 'test' } });
+    // fireEvent.click(submitButton);
+    // fireEvent.submit(form);
+  });
+});
