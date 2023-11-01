@@ -14,6 +14,8 @@ export function UserForm() {
   };
 
   const [userState, setUserState] = useState(initialState);
+  // const [actualPage, setActualPage] = userState(1);
+  const isDisable = true;
 
   const handleChange = (ev: SyntheticEvent) => {
     const control = ev.target as HTMLInputElement;
@@ -154,7 +156,9 @@ export function UserForm() {
             <p>Email: {userState.email}</p>
             <p>Account Type: {userState.accountType}</p>
           </div>
-          <button type="submit">Confirm</button>
+          <button type="submit" disabled>
+            Confirm
+          </button>
         </div>
       </fieldset>
     </form>
